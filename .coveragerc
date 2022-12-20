@@ -1,11 +1,15 @@
 [run]
-branch = true
-parallel = true
+branch = True
+# parallel = True
 omit =
     src/pytest_datadir_extras/__about__.py
 
+source = src/pytest_datadir_extras
+
 [report]
 exclude_lines =
-    no cov
-    if __name__ == "__main__:"
+    pragma: no cover
+    if __name__ == .__main__.:
     if TYPE_CHECKING:
+
+fail_under = 100

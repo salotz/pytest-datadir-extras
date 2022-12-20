@@ -26,13 +26,16 @@ classifiers = [
 dependencies = []
 dynamic = ["version"]
 
+[project.entry-points.pytest11]
+pytest_datadir_extras = "pytest_datadir_extras.plugin"
+
 [project.urls]
 Documentation = "https://github.com/unknown/pytest-datadir-extras#readme"
 Issues = "https://github.com/unknown/pytest-datadir-extras/issues"
 Source = "https://github.com/unknown/pytest-datadir-extras"
 
 [tool.hatch.version]
-path = "src/pytest_datadir/__about__.py"
+path = "src/pytest_datadir_extras/__about__.py"
 
 [tool.hatch.envs.default]
 
@@ -40,10 +43,10 @@ python = "3.10"
 dependencies = [
   "pytest",
   "pytest-cov",
+  # interactive
+  "ipython",
+  "pdbpp",
 ]
-[tool.hatch.envs.default.scripts]
-cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=pytest_datadir_extras --cov=tests {args}"
-no-cov = "cov --no-cov {args}"
 
-[[tool.hatch.envs.test.matrix]]
-python = ["37", "38", "39", "310", "311"]
+# [[tool.hatch.envs.test.matrix]]
+# python = ["37", "38", "39", "310", "311"]

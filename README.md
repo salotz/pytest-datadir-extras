@@ -3,9 +3,10 @@
 Pytest plugin for cleanly injecting files into your tests. This is a friendly
 fork of the popular
 [pytest-datadir](https://github.com/gabrielcnr/pytest-datadir) that adds extra
-functionality. In addition to the data-directories by convention in the original
-this package provides you with programmable factories for generating datadir's
-against any folder and with any scope you wish.
+functionality and fixes some broken patterns. In addition to the
+data-directories by convention in the original this package provides you with
+programmable factories for generating datadir's against any folder and with any
+scope you wish.
 
 [![PyPI - Version](https://img.shields.io/pypi/v/pytest-datadir-extras.svg)](https://pypi.org/project/pytest-datadir-extras)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytest-datadir-extras.svg)](https://pypi.org/project/pytest-datadir-extras)
@@ -36,8 +37,8 @@ automatically scoped according to normal pytest fixture scopes.
 
 ## Traditional Behavior by Convention
 
-Using the existing `pytest-datadir` behavior you can look up for a directory
-with the name of your module or the global `data` folder. Let's say you have a
+Using similar ideas from `pytest-datadir` you can look up for a directory with
+the name of your module or the global `data` folder. Let's say you have a
 structure like this:
 
 ```
