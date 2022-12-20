@@ -1,16 +1,44 @@
-# pytest-datadir
+# pytest-datadir-extras
 
-pytest plugin for manipulating test data directories and files.
+Pytest plugin for cleanly injecting files into your tests. This is a friendly
+fork of the popular
+[pytest-datadir](https://github.com/gabrielcnr/pytest-datadir) that adds extra
+functionality. In addition to the data-directories by convention in the original
+this package provides you with programmable factories for generating datadir's
+against any folder and with any scope you wish.
 
-[![Build Status](https://travis-ci.org/gabrielcnr/pytest-datadir.svg?branch=master)](https://travis-ci.org/gabrielcnr/pytest-datadir)
-[![PyPI](https://img.shields.io/pypi/v/pytest-datadir.svg)](https://pypi.python.org/pypi/pytest-datadir)
-[![PythonVersions](https://img.shields.io/pypi/pyversions/pytest-datadir.svg)](https://pypi.python.org/pypi/pytest-datadir)
-[![CondaForge](https://img.shields.io/conda/vn/conda-forge/pytest-datadir.svg)](https://anaconda.org/conda-forge/pytest-datadir)
+[![PyPI - Version](https://img.shields.io/pypi/v/pytest-datadir-extras.svg)](https://pypi.org/project/pytest-datadir-extras)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pytest-datadir-extras.svg)](https://pypi.org/project/pytest-datadir-extras)
+
+-----
+
+**Table of Contents**
+
+- [Installation](#installation)
+- [License](#license)
+
+## Installation
+
+```console
+pip install pytest-datadir-extras
+```
+
+## License
+
+`pytest-datadir-extras` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
 
 
 # Usage
-pytest-datadir will look up for a directory with the name of your module or the global 'data' folder.
-Let's say you have a structure like this:
+
+In this document we refer to a "datadir" as a pytest fixture that provides a
+copy of an existing file or directory into a safe, configurable location that is
+automatically scoped according to normal pytest fixture scopes.
+
+## Traditional Behavior by Convention
+
+Using the existing `pytest-datadir` behavior you can look up for a directory
+with the name of your module or the global `data` folder. Let's say you have a
+structure like this:
 
 ```
 .
@@ -40,8 +68,11 @@ pytest-datadir will copy the original file to a temporary folder, so changing th
 
 Both `datadir` and `shared_datadir` fixtures are `pathlib.Path` objects.
 
+The `other_data` folder on the other hand is innaccessible with this legacy
+behavior.
 
-## Scoped datadirs
+
+## Extra Configurable Functionality
 
 By default `datadir` and `shared_datadir` are scoped by function and are actually aliases for `function_datadir` and `function_shared_datadir`.
 
@@ -51,7 +82,13 @@ This library provides scoped `datadirs` and `shared_datadirs` for:
 - class
 - function
 
-The benefit of using scoped datadirs is that if your data files are large then each test will need to copy them which can be very slow. Using the scoped datadirs will only copy them once for the scope. Be careful though, as any changes to the directory will be seen by other tests in the scope.
+If your data files are large then each test will need to copy them which can be
+very slow. If you know you will not be writing back to a file you can use a
+higher scoped fixture will only copy them once for e.g. the module. Be careful
+though, as any changes to the directory will be seen by other tests in the
+scope.
+
+TODO
 
 
 ## Datadir factory
@@ -89,20 +126,8 @@ def test_factory_module(datadir_factory):
     
 ```
 
-# Releases
+# TODO
 
-Follow these steps to make a new release:
-
-1. Create a new branch `release-X.Y.Z` from `master`.
-2. Update `CHANGELOG.rst`.
-3. Open a PR.
-4. After it is **green** and **approved**, push a new tag in the format `X.Y.Z`.
-
-Travis will deploy to PyPI automatically.
-
-Afterwards, update the recipe in [conda-forge/pytest-datadir-feedstock](https://github.com/conda-forge/pytest-datadir-feedstock).
-
-# License
-
-MIT.
-
+- [ ] session scopes for files
+- [ ] permissions manipulation
+- [ ] Support for customizing link/copy behavior. I.e. reflinks.

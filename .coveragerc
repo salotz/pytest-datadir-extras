@@ -1,0 +1,11 @@
+[run]
+branch = true
+parallel = true
+omit =
+    src/pytest_datadir_extras/__about__.py
+
+[report]
+exclude_lines =
+    no cov
+    if __name__ == "__main__:"
+    if TYPE_CHECKING:
